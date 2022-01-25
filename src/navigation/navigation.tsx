@@ -5,13 +5,26 @@ import HomeComponent from './../components/home/home';
 import SettingsComponent from './../components/settings/settings';
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+type WelcomeParams = {
+};
+type HomeParams = {
+};
+type SettingsParams = {
+};
+
+type RootStackParamList = {
+    Welcome: WelcomeParams;
+    Home: HomeParams;
+    Settings: SettingsParams;
+};
 
 class Navigation extends React.Component {
     render() {
         return (
             <NavigationContainer>
-                <Stack.Navigator>
+                <Stack.Navigator initialRouteName='Welcome'>
                     <Stack.Screen name="Welcome" component={WelcomeComponent} />
                     <Stack.Screen name="Home" component={HomeComponent} />
                     <Stack.Screen name="Settings" component={SettingsComponent} />
@@ -23,9 +36,15 @@ class Navigation extends React.Component {
 
 export default Navigation;
 
-class WelcomeComponent extends React.Component {
-    render() {
+type WelcomeProps = {
+}
 
+class WelcomeComponent extends React.Component<WelcomeProps> {
+    constructor(props: WelcomeProps) {
+        super(props);
+    };
+
+    render() {
         const welcomeStyles = StyleSheet.create({
             container: {
                 flex: 1,
