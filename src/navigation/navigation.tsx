@@ -1,11 +1,11 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+import { NavigationContainer, RouteProp } from '@react-navigation/native';
+import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
 import HomeComponent from './../components/home/home';
 import SettingsComponent from './../components/settings/settings';
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 type WelcomeParams = {
 };
@@ -14,21 +14,27 @@ type HomeParams = {
 type SettingsParams = {
 };
 
-type RootStackParamList = {
+export type RootStackParamList = {
     Welcome: WelcomeParams;
     Home: HomeParams;
     Settings: SettingsParams;
 };
 
-class Navigation extends React.Component {
+type Props = {
+};
+
+class Navigation extends React.Component<Props> {
+    constructor(props: Props) {
+        super(props);
+    };
     render() {
         return (
             <NavigationContainer>
-                <Stack.Navigator initialRouteName='Welcome'>
-                    <Stack.Screen name="Welcome" component={WelcomeComponent} />
-                    <Stack.Screen name="Home" component={HomeComponent} />
-                    <Stack.Screen name="Settings" component={SettingsComponent} />
-                </Stack.Navigator>
+                <RootStack.Navigator initialRouteName='Welcome'>
+                    <RootStack.Screen name="Welcome" component={WelcomeComponent} />
+                    <RootStack.Screen name="Home" component={HomeComponent} />
+                    <RootStack.Screen name="Settings" component={SettingsComponent} />
+                </RootStack.Navigator>
             </NavigationContainer>
         );
     };
@@ -37,7 +43,9 @@ class Navigation extends React.Component {
 export default Navigation;
 
 type WelcomeProps = {
-}
+    navigation: NativeStackNavigationProp<RootStackParamList>;
+    route: RouteProp<RootStackParamList, 'Welcome'>;
+};
 
 class WelcomeComponent extends React.Component<WelcomeProps> {
     constructor(props: WelcomeProps) {
@@ -45,6 +53,8 @@ class WelcomeComponent extends React.Component<WelcomeProps> {
     };
 
     render() {
+        const { navigation } = this.props;
+
         const welcomeStyles = StyleSheet.create({
             container: {
                 flex: 1,
@@ -58,10 +68,10 @@ class WelcomeComponent extends React.Component<WelcomeProps> {
 
         return (
             <View style={welcomeStyles.container}>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Home', {})}>
                     <Text style={welcomeStyles.text}>Go to home screen</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Settings', {})}>
                     <Text style={welcomeStyles.text}>Go to settings screen</Text>
                 </TouchableOpacity>
             </View>
