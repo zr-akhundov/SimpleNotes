@@ -1,4 +1,6 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
+
 import Navigation from './src/navigation/navigation';
 
 type Props = {
@@ -10,7 +12,10 @@ class App extends React.Component {
 	};
 	render() {
 		return (
-			<Navigation />
+			<>
+				<StatusBar backgroundColor='#673928' barStyle='light-content' />
+				<Navigation />
+			</>
 		);
 	};
 };
