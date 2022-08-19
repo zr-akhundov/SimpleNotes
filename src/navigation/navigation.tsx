@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import HomeScreen from './../components/home/home';
+import { navStyles } from './../appStyles';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -14,12 +15,11 @@ export type RootStackParamList = {
 type Props = {
 };
 
-const navigationOptions: { [key: string]: NativeStackNavigationOptions } = {
-    Home: {
-        title: 'Simple Notes',
-        headerStyle: { backgroundColor: '#673928' },
-        headerTitleStyle: { color: '#FFF7E7', fontWeight: 'normal', fontSize: 18 },
-        contentStyle: { backgroundColor: '#FFE6B5' }
+const navOptions: { [key: string]: NativeStackNavigationOptions } = {
+    defaultStyle: {
+        headerStyle: navStyles.navHeaderStyle,
+        headerTitleStyle: navStyles.navHeaderTitleStyle,
+        contentStyle: navStyles.navContentStyle
     }
 };
 
@@ -31,7 +31,7 @@ class Navigation extends React.Component<Props> {
         return (
             <NavigationContainer>
                 <RootStack.Navigator initialRouteName='Home'>
-                    <RootStack.Screen name="Home" component={HomeScreen} options={navigationOptions.Home} />
+                    <RootStack.Screen name="Home" component={HomeScreen} options={{ ...navOptions.defaultStyle, title: 'Simple Notes' }} />
                 </RootStack.Navigator>
             </NavigationContainer>
         );
