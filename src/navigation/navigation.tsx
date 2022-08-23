@@ -14,24 +14,32 @@ export type RootStackParamList = {
 
 type Props = {
 };
+type State = {
+}
 
-const navOptions: { [key: string]: NativeStackNavigationOptions } = {
-    defaultStyle: {
-        headerStyle: navStyles.navHeaderStyle,
-        headerTitleStyle: navStyles.navHeaderTitleStyle,
-        contentStyle: navStyles.navContentStyle
-    }
+const navOptionsDefaultStyle: NativeStackNavigationOptions = {
+    headerStyle: navStyles.headerStyle,
+    headerTitleStyle: navStyles.headerTitleStyle,
+    contentStyle: navStyles.contentStyle
+};
+type navOptionsProperties = {
+    Home: NativeStackNavigationOptions
+};
+const navOptions: navOptionsProperties = {
+    Home: { ...navOptionsDefaultStyle, title: 'Simple Notes' }
 };
 
-class Navigation extends React.Component<Props> {
+class Navigation extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
+        this.state = {
+        };
     };
     render() {
         return (
             <NavigationContainer>
                 <RootStack.Navigator initialRouteName='Home'>
-                    <RootStack.Screen name="Home" component={HomeScreen} options={{ ...navOptions.defaultStyle, title: 'Simple Notes' }} />
+                    <RootStack.Screen name="Home" component={HomeScreen} options={navOptions.Home} />
                 </RootStack.Navigator>
             </NavigationContainer>
         );

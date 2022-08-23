@@ -7,19 +7,18 @@ export const appColors = {
 }
 
 export const navStyles = StyleSheet.create({
-    navHeaderStyle: {
+    headerStyle: {
         backgroundColor: appColors.brown
     },
-    navHeaderTitleStyle: {
+    headerTitleStyle: {
         color: appColors.lightYellow,
         fontWeight: 'normal',
         fontSize: 18
     },
-    navContentStyle: {
+    contentStyle: {
         backgroundColor: appColors.yellow
     }
 });
 
 export const appStyles = StyleSheet.create({
-
 });
