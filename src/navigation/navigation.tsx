@@ -15,9 +15,9 @@ export type RootStackParamList = {
 type Props = {
 };
 type State = {
-}
+};
 
-const navOptionsDefaultStyle: NativeStackNavigationOptions = {
+const navOptionsDefaultStyles: NativeStackNavigationOptions = {
     headerStyle: navStyles.headerStyle,
     headerTitleStyle: navStyles.headerTitleStyle,
     contentStyle: navStyles.contentStyle
@@ -26,7 +26,7 @@ type navOptionsProperties = {
     Home: NativeStackNavigationOptions
 };
 const navOptions: navOptionsProperties = {
-    Home: { ...navOptionsDefaultStyle, title: 'Simple Notes' }
+    Home: { ...navOptionsDefaultStyles, title: 'Simple Notes' }
 };
 
 class Navigation extends React.Component<Props, State> {
